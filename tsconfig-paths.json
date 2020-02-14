@@ -1,0 +1,15 @@
+//	For every root folder, be it a view or common module, an alias can be added here to allow for cleaner imports.
+
+// NOTE: redux renamed to rdx in folders to avoid conflict with redux package
+{
+    "compilerOptions": {
+      "baseUrl": "./src",
+      "paths": {
+        "components/*": ["components/*"],
+        "redux/*": ["rdx/*"],
+        "hooks/*": ["hooks/*"],
+        "views/*": ["views/*"],
+        "utils/*": ["utils/*"]
+      }
+    }
+  }
