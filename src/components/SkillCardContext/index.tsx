@@ -21,18 +21,20 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Skills({ id, edit } : { id: string; edit: (skills: any) => void }) {
   const classes = useStyles();
+
   console.log('Rendering Skills for id: ' + id);
-  const skills = useUser(makeUserSkills, [id]);
+  const skills = useUser('STATE', makeUserSkills, [id]);
 
   const handleDelete = (skillName: String) => () => {
 
     const updatedSkills = skills.filter((skill: String) => skill !== skillName);
+
     edit({ skills: updatedSkills });
   };
 
   return (
     <Paper className={classes.root}>
-      {skills.map((skill: String, index: number) => {
+      {skills?.map((skill: String, index: number) => {
         return (
           <Chip
             key={`skill-${index}`}

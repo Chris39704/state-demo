@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -9,7 +9,6 @@ import Input from '@material-ui/core/Input';
 import Skills from 'components/SkillCardContext';
 import TYPES from 'utils/constants';
 import { makeUser } from 'context/userSelectors';
-import useUsersContext from 'hooks/UserContext';
 import useUser from 'hooks/Users';
 
 const useStyles = makeStyles({
@@ -18,15 +17,14 @@ const useStyles = makeStyles({
   },
 });
 
-export default function UserCard({id} : { id: string }) {
+export default function UserCard({id } : { id: string }) {
   const classes = useStyles();
-  const user = useUser(makeUser, [id]);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [ userState, dispatch ] = useUsersContext();
+  const user = useUser('STATE', makeUser, [id]);
+  const dispatch = useUser('ACTION');
+
   const [state, setState] = React.useState({...user});
 
   console.log('Rendering Card for id: ' + id);
-
 
 const editUser = () => {
   let updatedUser = {...user, ...state };
@@ -52,11 +50,6 @@ const handleChangeLocation = (e: any) => {
   setState({ ...state , location: e.target.value });
 
 }
-
-
-// const removeUser = () => {
-//     dispatch({ type: TYPES.REMOVE_USER, payload: id });
-// }
 
   return (
     <Card className={classes.root} key={id}>

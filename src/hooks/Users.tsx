@@ -1,10 +1,11 @@
 import { useContext } from 'react';
 import {UserContext} from 'hooks/UserContext';
 
-function useUserIds(selector?: any, args?: any[]) {
-const users = useContext(UserContext);
+function useUserIds(type: 'STATE' | 'ACTION', selector?: any, args?: any[]) {
+const {users, dispatch} = useContext(UserContext);
 if(selector && args) {
 const selectedData = selector(users, ...args);
+    console.log(selectedData);
 
 return selectedData;
 } if(selector && !args) {
@@ -12,8 +13,10 @@ return selectedData;
 
     return selectedData;
 }
-else {
+if(type === 'STATE') {
 return users;
+} else if(type === 'ACTION') {
+    return dispatch;
 }
 }
 

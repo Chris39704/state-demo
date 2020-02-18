@@ -6,7 +6,7 @@ import { makeUserIds } from 'context/userSelectors';
 
 export default function SimpleTabs() {
   console.log('Rendering container');
-  const ids = useUser(makeUserIds);
+  const ids = useUser('STATE', makeUserIds);
 
   return (
     <div>
