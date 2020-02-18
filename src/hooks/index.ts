@@ -1,1 +1,1 @@
-export { default as useUserIds } from './UserIds';
+export { default as useUsers } from './Users';
