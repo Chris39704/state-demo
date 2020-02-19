@@ -1,25 +1,67 @@
-import { createContext, useState } from 'react';
-import TYPES from 'utils/constants';
+import React, { createContext } from 'react';
+import userReducer from 'context/userReducer';
+import { makeUserSkills, makeUser, makeUserIds } from 'context/userSelectors';
 
+type Dispatch = (action: any) => void
+type UserProviderProps = {children: React.ReactNode}
 
-export const UserContext = createContext<null | Map<string, any> | any>(null);
+const UserStateContext = createContext<null | Map<string, any> | any>(null);
+const UserDispatchContext = createContext<Dispatch>((action: any) => null);
 
-function useUserContext() {
-    const [ users, setUsers ] = useState(new Map());
+function UserProvider({children}: UserProviderProps) {
+    const [state, dispatch] = React.useReducer(userReducer, new Map())
+    return (
+      <UserStateContext.Provider value={state}>
+        <UserDispatchContext.Provider value={dispatch}>
+          {children}
+        </UserDispatchContext.Provider>
+      </UserStateContext.Provider>
+    )
+  }
 
-    const updateUser = ({ type, payload } : { type: string, payload: any }) => {
-        switch(type) {
-            case TYPES.ADD_USER_CONTEXT:
-               setUsers(new Map(payload.map((u: any) => [u.id, u])));
-               break;
-               case TYPES.EDIT_USER_CONTEXT:
-                setUsers(new Map(users).set(payload.id, payload));
-                break;
-              default:
-                throw new Error();
-        }
+export function UserConsumer({children}: any) {
+    return (
+      <UserStateContext.Consumer>
+        {context => {
+          if (context === undefined) {
+            throw new Error('UserConsumer must be used within a UserProvider')
+          }
+          return children(context)
+        }}
+      </UserStateContext.Consumer>
+    )
+}
+
+export default UserProvider;
+
+export function useUserState() {
+    const context = React.useContext(UserStateContext)
+    if (context === undefined) {
+      throw new Error('useCountState must be used within a CountProvider')
     }
-       return { users, dispatch: updateUser };
-   }
+    return context
+  }
+export function useUserDispatch() {
+    const context = React.useContext(UserDispatchContext)
+    if (context === undefined) {
+      throw new Error('useCountDispatch must be used within a CountProvider')
+    }
+    return context
+  }
 
-export default useUserContext;
+
+type userSelector = 'STATE' | 'IDS' | 'USER' | 'SKILLS';
+
+export function useUser(type: userSelector, id: any) {
+    const state = useUserState();
+    switch(type){
+        case 'STATE':
+        return state;
+        case 'IDS':
+        return makeUserIds(state);
+        case 'USER':
+        return makeUser(state, id);
+        case 'SKILLS':
+        return makeUserSkills(state, id);
+    }
+}

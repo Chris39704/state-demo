@@ -2,8 +2,7 @@ import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
 import Paper from '@material-ui/core/Paper';
-import useUser from 'hooks/Users';
-import { makeUserSkills } from 'context/userSelectors';
+import { useUser } from 'hooks/UserContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,14 +18,14 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+
 export default function Skills({ id, edit } : { id: string; edit: (skills: any) => void }) {
   const classes = useStyles();
 
   console.log('Rendering Skills for id: ' + id);
-  const skills = useUser('STATE', makeUserSkills, [id]);
+  const skills = useUser('SKILLS', id);
 
   const handleDelete = (skillName: String) => () => {
-
     const updatedSkills = skills.filter((skill: String) => skill !== skillName);
 
     edit({ skills: updatedSkills });
