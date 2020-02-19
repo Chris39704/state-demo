@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
 import Paper from '@material-ui/core/Paper';
-import { useUser } from 'hooks/UserContext';
+import { UserConsumer } from 'hooks/UserContext';
+import { makeUserSkills } from 'context/userSelectors';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,15 +24,19 @@ export default function Skills({ id, edit } : { id: string; edit: (skills: any) 
   const classes = useStyles();
 
   console.log('Rendering Skills for id: ' + id);
-  const skills = useUser('SKILLS', id);
+  // const skills = useUser('SKILLS', id);
+  return useMemo(() => (
+    <UserConsumer>
+      {(value: any) => {
 
-  const handleDelete = (skillName: String) => () => {
-    const updatedSkills = skills.filter((skill: String) => skill !== skillName);
+const skills = makeUserSkills(value, id);
 
-    edit({ skills: updatedSkills });
-  };
+const handleDelete = (skillName: String) => () => {
+  const updatedSkills = skills.filter((skill: String) => skill !== skillName);
 
-  return (
+  edit({ skills: updatedSkills });
+};
+   return (
     <Paper className={classes.root}>
       {skills?.map((skill: String, index: number) => {
         return (
@@ -44,5 +49,8 @@ export default function Skills({ id, edit } : { id: string; edit: (skills: any) 
         );
       })}
     </Paper>
-  );
+  )}
+}
+</UserConsumer>
+), [classes, id, edit])
 }

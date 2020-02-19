@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -7,7 +7,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Input from '@material-ui/core/Input';
 import Skills from 'components/SkillCardContext';
 import TYPES from 'utils/constants';
-import { useUserDispatch, useUser } from 'hooks/UserContext';
+import { UserConsumer, dispatchUsers } from 'hooks/UserContext';
+import { makeUser } from 'context/userSelectors';
 
 const useStyles = makeStyles({
   root: {
@@ -19,31 +20,30 @@ export default function UserCard({id}: any) {
   const classes = useStyles();
   console.log('Rendering Card for id: ' + id);
 
-  const user = useUser('USER', id);
-  const dispatch = useUserDispatch();
+return useMemo(() => (
+  <UserConsumer>
+    {(value: any) => {
+      const user: any = makeUser(value, id);
+     const editUserSkill = (skills: any) => {
+      let updatedSkills = { ...user, ...skills };
+          // @ts-ignore
+      dispatchUsers({ type: TYPES.EDIT_USER_CONTEXT, payload: updatedSkills });
+    }
 
-const editUserSkill = (skills: any) => {
-  let updatedSkills = { ...user, ...skills };
-      // @ts-ignore
-    dispatch({ type: TYPES.EDIT_USER_CONTEXT, payload: updatedSkills });
-}
+    const handleChangeName = (e: any) => {
+      dispatchUsers({ type: TYPES.EDIT_USER_CONTEXT, payload: { ...user, name: e.target.value }});
 
-const handleChangeName = (e: any) => {
-  dispatch({ type: TYPES.EDIT_USER_CONTEXT, payload: { ...user, name: e.target.value }});
+    }
+    const handleChangeDOB = (e: any) => {
+      dispatchUsers({ type: TYPES.EDIT_USER_CONTEXT, payload: { ...user, dob: e.target.value }});
 
-}
-const handleChangeDOB = (e: any) => {
-  dispatch({ type: TYPES.EDIT_USER_CONTEXT, payload: { ...user, dob: e.target.value }});
+    }
+    const handleChangeLocation = (e: any) => {
+      dispatchUsers({ type: TYPES.EDIT_USER_CONTEXT, payload: { ...user , location: e.target.value }});
 
-}
-const handleChangeLocation = (e: any) => {
-  dispatch({ type: TYPES.EDIT_USER_CONTEXT, payload: { ...user , location: e.target.value }});
+    }
 
-}
-
-
-
-return (
+    return (
     <Card className={classes.root} key={id}>
       <CardActionArea>
         <CardContent>
@@ -58,5 +58,8 @@ return (
       <CardActions>
         </CardActions>
     </Card>
-)
+            )}
+          }
+  </UserConsumer>
+), [classes, id])
 }

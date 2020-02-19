@@ -1,45 +1,66 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">
+State Management Demo
+</p>
 
-## Available Scripts
+<br>
+<hr />
+<br />
 
-In the project directory, you can run:
+<div align="center">
+  <a href="https://facebook.github.io/react/" target="_blank"><img src="./internals/img/react-padded-90.png" /></a>
+  <a href="http://redux.js.org/" target="_blank"><img src="./internals/img/redux-padded-90.png" /></a>
+</div>
+<hr />
+<br />
 
-### `yarn start`
+<div align="center">
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[![Version][github-version]][github-tag-url]
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+</div>
 
-### `yarn test`
+## About The Project
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+There are 3 different routes / examples in this project. `Redux/Context/State-Only`
 
-### `yarn build`
+```bash
+$ yarn install | npm i
+$ yarn start | npm start
+```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Following Examples
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+```
+Redux: The Redux examples have Redux Sagas incorporated into them. Redux-Sagas is a helper library to help run side-effects / functionality that relates to your abstracted data workflow. Redux-Sagas is not needed.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Redux Example Folders are named as such `SkillCard, TabComponent, UserCard, HomeView`
 
-### `yarn eject`
+Context: The Context Example shows how to Architect and set up a simple abstracted context provider with a 'dispatcher' type method for global updates. *NOTE* as you can see from the examples it is much more work to prevent extra re-renders as a side effect of the Context Hooks provided by React. Redux is still a step ahead of the plain Context/Reducer combo when it comes to not having to reinvent the wheel.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Context Example Folders are named as such `SkillCardContext, TabContext, UserCardContext, HomeViewContext`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+State-Only: THIS EXAMPLE IS NOT A GOOD EXAMPLE TO FOLLOW. This is here to show how when you update the parent it will update all of the child components and is not a good method of state management as with a large application it will not scale and will become very hard to track your source of data and make it alot harder to debug.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+State-Only Example Folders are named as such `SkillCardReact, TabReact, UserCardReact, HomeViewReactOnly`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
 
-## Learn More
+## Misc
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The Application pulls sample data from my node api.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-# state-demo
+Console logs print out when a component re-renders so that you can see when a component is re-rendering. (optimal rendering would be just rendering the component you are modifying and it's children)
+
+It's written in TypeScript but was put together rather quickly so don't be suprised if you run into typing errors when modifying code. Alot of it was thrown together with Any's to substitute for time in putting this together rather quickly.
+
+
+You can click the React or Redux logos at the top of the README to get more indepth information on Hooks / Context / Redux.
+
+
+## Maintainers
+
+- [Chris](https://github.com/Chris3970439704)
+
+
+[github-tag-url]: https://github.com/Chris39704/state-demo
+[github-version]: https://img.shields.io/badge/Version-0.0.1-lightgrey.svg

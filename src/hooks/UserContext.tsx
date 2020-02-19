@@ -8,8 +8,13 @@ type UserProviderProps = {children: React.ReactNode}
 const UserStateContext = createContext<null | Map<string, any> | any>(null);
 const UserDispatchContext = createContext<Dispatch>((action: any) => null);
 
+export let dispatchUsers: any;
+
 function UserProvider({children}: UserProviderProps) {
-    const [state, dispatch] = React.useReducer(userReducer, new Map())
+    const [state, dispatch] = React.useReducer(userReducer, new Map());
+
+    dispatchUsers = dispatch;
+
     return (
       <UserStateContext.Provider value={state}>
         <UserDispatchContext.Provider value={dispatch}>
@@ -19,14 +24,14 @@ function UserProvider({children}: UserProviderProps) {
     )
   }
 
-export function UserConsumer({children}: any) {
+export function UserConsumer(props: any) {
     return (
       <UserStateContext.Consumer>
         {context => {
           if (context === undefined) {
             throw new Error('UserConsumer must be used within a UserProvider')
           }
-          return children(context)
+          return props.children(context)
         }}
       </UserStateContext.Consumer>
     )
@@ -37,17 +42,22 @@ export default UserProvider;
 export function useUserState() {
     const context = React.useContext(UserStateContext)
     if (context === undefined) {
-      throw new Error('useCountState must be used within a CountProvider')
+      throw new Error('useUserState must be used within a UserProvider')
     }
     return context
   }
 export function useUserDispatch() {
     const context = React.useContext(UserDispatchContext)
     if (context === undefined) {
-      throw new Error('useCountDispatch must be used within a CountProvider')
+      throw new Error('useUserDispatch must be used within a UserProvider')
     }
     return context
   }
+
+export function UpdateUsers(action: any) {
+    const dispatch = useUserDispatch()
+    dispatch(action);
+}
 
 
 type userSelector = 'STATE' | 'IDS' | 'USER' | 'SKILLS';
