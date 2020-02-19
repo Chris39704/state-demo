@@ -47,7 +47,7 @@ State-Only Example Folders are named as such `SkillCardReact, TabReact, UserCard
 
 ## Misc
 
-The Application pulls sample data from my node api.
+The Application pulls sample data from my node api. (You can modify the number of items returned in each HomeView - file or for context in the Tab component file where a number value is passed for the number of items to return *Up to 1000*)
 
 Console logs print out when a component re-renders so that you can see when a component is re-rendering. (optimal rendering would be just rendering the component you are modifying and it's children)
 
