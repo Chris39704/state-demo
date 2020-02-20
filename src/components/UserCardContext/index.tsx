@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Input from '@material-ui/core/Input';
 import Skills from 'components/SkillCardContext';
 import TYPES from 'utils/constants';
-import { UserConsumer, dispatchUsers } from 'hooks/UserContext';
+import { UserConsumer, useUserDispatch } from 'hooks/UserContext';
 import { makeUser } from 'context/userSelectors';
 
 const useStyles = makeStyles({
@@ -19,6 +19,7 @@ const useStyles = makeStyles({
 export default function UserCard({id}: any) {
   const classes = useStyles();
   console.log('Rendering Card for id: ' + id);
+  const dispatch = useUserDispatch();
 
 return useMemo(() => (
   <UserConsumer>
@@ -27,19 +28,19 @@ return useMemo(() => (
      const editUserSkill = (skills: any) => {
       let updatedSkills = { ...user, ...skills };
           // @ts-ignore
-      dispatchUsers({ type: TYPES.EDIT_USER_CONTEXT, payload: updatedSkills });
+      dispatch({ type: TYPES.EDIT_USER_CONTEXT, payload: updatedSkills });
     }
 
     const handleChangeName = (e: any) => {
-      dispatchUsers({ type: TYPES.EDIT_USER_CONTEXT, payload: { ...user, name: e.target.value }});
+      dispatch({ type: TYPES.EDIT_USER_CONTEXT, payload: { ...user, name: e.target.value }});
 
     }
     const handleChangeDOB = (e: any) => {
-      dispatchUsers({ type: TYPES.EDIT_USER_CONTEXT, payload: { ...user, dob: e.target.value }});
+      dispatch({ type: TYPES.EDIT_USER_CONTEXT, payload: { ...user, dob: e.target.value }});
 
     }
     const handleChangeLocation = (e: any) => {
-      dispatchUsers({ type: TYPES.EDIT_USER_CONTEXT, payload: { ...user , location: e.target.value }});
+      dispatch({ type: TYPES.EDIT_USER_CONTEXT, payload: { ...user , location: e.target.value }});
 
     }
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import UserCard from 'components/UserCardContext';
-import { useUser, dispatchUsers } from 'hooks/UserContext';
+import { useUser, useUserDispatch } from 'hooks/UserContext';
 import TYPES from 'utils/constants';
 import { getUsers } from 'utils/api';
 import { UserConsumer } from 'hooks/UserContext';
@@ -10,10 +10,12 @@ import { makeUserIds } from 'context/userSelectors';
 export default function SimpleTabs() {
   console.log('Rendering container');
 
+  const dispatch = useUserDispatch();
+
   useEffect(() => {
     async function Users() {
       const usersList = await getUsers(2);
-      dispatchUsers({ type: TYPES.ADD_USER_CONTEXT, payload: usersList });
+      dispatch({ type: TYPES.ADD_USER_CONTEXT, payload: usersList });
       }
       Users();
   }, [])

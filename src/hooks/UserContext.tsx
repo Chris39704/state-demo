@@ -8,12 +8,8 @@ type UserProviderProps = {children: React.ReactNode}
 const UserStateContext = createContext<null | Map<string, any> | any>(null);
 const UserDispatchContext = createContext<Dispatch>((action: any) => null);
 
-export let dispatchUsers: any;
-
 function UserProvider({children}: UserProviderProps) {
     const [state, dispatch] = React.useReducer(userReducer, new Map());
-
-    dispatchUsers = dispatch;
 
     return (
       <UserStateContext.Provider value={state}>

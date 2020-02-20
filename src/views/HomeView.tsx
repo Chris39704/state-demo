@@ -23,7 +23,7 @@ const HomeView = () => {
   useEffect(() => {
     async function Users() {
       // TODO: try this call in saga instead
-    const users = await getUsers(5);
+    const users = await getUsers(1000);
     dispatch({ type: TYPES.ADD_USERS_SAGA, payload: users })
     }
     Users();
