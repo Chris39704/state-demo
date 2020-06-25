@@ -16,51 +16,71 @@ const useStyles = makeStyles({
   },
 });
 
-export default function UserCard({id}: any) {
+export default function UserCard({ id }: any) {
   const classes = useStyles();
   console.log('Rendering Card for id: ' + id);
   const dispatch = useUserDispatch();
 
-return useMemo(() => (
-  <UserConsumer>
-    {(value: any) => {
-      const user: any = makeUser(value, id);
-     const editUserSkill = (skills: any) => {
-      let updatedSkills = { ...user, ...skills };
-          // @ts-ignore
-      dispatch({ type: TYPES.EDIT_USER_CONTEXT, payload: updatedSkills });
-    }
+  return useMemo(
+    () => (
+      <UserConsumer>
+        {(value: any) => {
+          const user: any = makeUser(value, id);
+          const editUserSkill = (skills: any) => {
+            const updatedSkills = { ...user, ...skills };
+            // @ts-ignore
+            dispatch({ type: TYPES.EDIT_USER_CONTEXT, payload: updatedSkills });
+          };
 
-    const handleChangeName = (e: any) => {
-      dispatch({ type: TYPES.EDIT_USER_CONTEXT, payload: { ...user, name: e.target.value }});
+          const handleChangeName = (e: any) => {
+            dispatch({
+              type: TYPES.EDIT_USER_CONTEXT,
+              payload: { ...user, name: e.target.value },
+            });
+          };
+          const handleChangeDOB = (e: any) => {
+            dispatch({
+              type: TYPES.EDIT_USER_CONTEXT,
+              payload: { ...user, dob: e.target.value },
+            });
+          };
+          const handleChangeLocation = (e: any) => {
+            dispatch({
+              type: TYPES.EDIT_USER_CONTEXT,
+              payload: { ...user, location: e.target.value },
+            });
+          };
 
-    }
-    const handleChangeDOB = (e: any) => {
-      dispatch({ type: TYPES.EDIT_USER_CONTEXT, payload: { ...user, dob: e.target.value }});
-
-    }
-    const handleChangeLocation = (e: any) => {
-      dispatch({ type: TYPES.EDIT_USER_CONTEXT, payload: { ...user , location: e.target.value }});
-
-    }
-
-    return (
-    <Card className={classes.root} key={id}>
-      <CardActionArea>
-        <CardContent>
-        <form className={classes.root} noValidate autoComplete="off">
-        <Input value={user.name} onChange={handleChangeName} inputProps={{ 'aria-label': 'name' }} />
-        <Input value={user.dob} onChange={handleChangeDOB}  inputProps={{ 'aria-label': 'date of birth' }} />
-        <Input value={user.location} onChange={handleChangeLocation}  inputProps={{ 'aria-label': 'location' }} />
-        <Skills id={id} edit={editUserSkill} />
-        </form>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        </CardActions>
-    </Card>
-            )}
-          }
-  </UserConsumer>
-), [classes, id])
+          return (
+            <Card className={classes.root} key={id}>
+              <CardActionArea>
+                <CardContent>
+                  <form className={classes.root} noValidate autoComplete="off">
+                    <Input
+                      value={user.name}
+                      onChange={handleChangeName}
+                      inputProps={{ 'aria-label': 'name' }}
+                    />
+                    <Input
+                      value={user.dob}
+                      onChange={handleChangeDOB}
+                      inputProps={{ 'aria-label': 'date of birth' }}
+                    />
+                    <Input
+                      value={user.location}
+                      onChange={handleChangeLocation}
+                      inputProps={{ 'aria-label': 'location' }}
+                    />
+                    <Skills id={id} edit={editUserSkill} />
+                  </form>
+                </CardContent>
+              </CardActionArea>
+              <CardActions></CardActions>
+            </Card>
+          );
+        }}
+      </UserConsumer>
+    ),
+    [classes, id]
+  );
 }

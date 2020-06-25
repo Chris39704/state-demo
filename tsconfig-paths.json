@@ -10,7 +10,8 @@
       "mobx/*": ["mobx/*"],
       "hooks/*": ["hooks/*"],
       "views/*": ["views/*"],
-      "utils/*": ["utils/*"]
+      "utils/*": ["utils/*"],
+      "workers/*": ["workers/*"]
     }
   }
 }

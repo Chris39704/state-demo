@@ -4,7 +4,10 @@ import { buffers } from 'redux-saga';
 import Types from 'utils/constants';
 
 export function* watchAddUsers() {
-  const addMessageChannel = yield actionChannel(Types.ADD_USERS_SAGA, buffers.expanding());
+  const addMessageChannel = yield actionChannel(
+    Types.ADD_USERS_SAGA,
+    buffers.expanding()
+  );
   while (true) {
     const { payload } = yield take(addMessageChannel);
     try {
@@ -17,7 +20,6 @@ export function* watchAddUsers() {
 }
 
 function* handleAdd(payload: any) {
-
   payload.map((d: any) => [d.id, d]);
 
   yield put(addUsers(payload));

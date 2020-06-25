@@ -16,20 +16,25 @@ export default function SimpleTabs() {
     async function Users() {
       const usersList = await getUsers(2);
       dispatch({ type: TYPES.ADD_USER_CONTEXT, payload: usersList });
-      }
-      Users();
-  }, [])
+    }
+    Users();
+  }, []);
 
-      return useMemo(() => (
+  return useMemo(
+    () => (
       <UserConsumer>
         {(value: any) => {
-      const ids: any = makeUserIds(value);
-        return (
-      <Grid container>
-      {ids.map((id: string) => <UserCard key={id} id={id} /> )}
-      </Grid>
-        )}
-  }
+          const ids: any = makeUserIds(value);
+          return (
+            <Grid container>
+              {ids.map((id: string) => (
+                <UserCard key={id} id={id} />
+              ))}
+            </Grid>
+          );
+        }}
       </UserConsumer>
-      ), [])
+    ),
+    []
+  );
 }

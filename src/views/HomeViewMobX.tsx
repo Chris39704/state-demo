@@ -1,19 +1,19 @@
-import React from "react";
-import { Paper, makeStyles, createStyles, Theme } from "@material-ui/core";
-import Tabs from "components/TabMobX";
-import { rootStore, Provider } from "mobx/index";
+import React from 'react';
+import { Paper, makeStyles, createStyles, Theme } from '@material-ui/core';
+import Tabs from 'components/TabMobX';
+import { rootStore, Provider } from 'mobx/index';
 
 export const HomeViewMobXStyle = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      height: "100%",
-      width: "100%"
-    }
+      height: '100%',
+      width: '100%',
+    },
   })
 );
 
 const HomeViewMobX = () => {
-  console.log("Rendering HomeView");
+  console.log('Rendering HomeView');
   const classes = HomeViewMobXStyle();
 
   return (

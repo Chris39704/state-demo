@@ -1,8 +1,8 @@
-import React from "react";
-import Grid from "@material-ui/core/Grid";
-import UserCard from "components/UserCardMobX";
-import { observer, useObserver } from "mobx-react-lite";
-import { useMST } from "mobx/index";
+import React from 'react';
+import Grid from '@material-ui/core/Grid';
+import UserCard from 'components/UserCardMobX';
+import { observer, useObserver } from 'mobx-react-lite';
+import { useMST } from 'mobx/index';
 
 const SimpleTabs = observer(() => {
   const userIDs = useUsers();

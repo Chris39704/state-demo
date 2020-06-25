@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Paper from '@material-ui/core/Paper';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Tabs from 'components/TabComponent';
-import { spawn, Thread, Worker } from "threads"
-// import { getUsers } from 'utils/api';
+import { Button } from '@material-ui/core';
+import { spawn, Worker } from 'threads';
+import { ObservablePromise } from 'threads/dist/observable-promise';
+import { PrivateThreadProps, ModuleProxy } from 'threads/dist/types/master';
 
+// import { getUsers } from 'utils/api';
 
 export const HomeViewStyle = makeStyles((theme: Theme) =>
   createStyles({
@@ -15,34 +17,82 @@ export const HomeViewStyle = makeStyles((theme: Theme) =>
   })
 );
 
-const HomeView = async () => {
+const HomeView = () => {
   console.log('Rendering HomeViewThreads');
+  const [counter, setCounter] = useState<
+    | undefined
+    | ((() => ObservablePromise<any>) & PrivateThreadProps & ModuleProxy<any>)
+  >();
+  const [currCount, setCurr] = useState(0);
   const classes = HomeViewStyle();
 
+  if (counter) {
+    counter.values().subscribe(({ count }: { count: number }) => {
+      setCurr(count);
+      console.log(`Count: ${count}`);
+    });
+  }
 
+  const createCounter = async () => {
+    const counterWorker = await spawn(new Worker('../workers/counter'));
+    setCounter(counterWorker);
+  };
 
-const counter = await spawn(new Worker("../workers/counter"))
+  // await Thread.terminate(counter);
+  // };
 
-counter.values().subscribe(({ min, max } : { min: number; max: number}) => {
-  console.log(`Min: ${min} | Max: ${max}`)
-})
+  if (!counter) {
+    createCounter();
+  }
 
-await counter.increment();
-await counter.decrement();
-await counter.increment();
-await counter.increment();
-await counter.decrement();
-await counter.decrement();
+  // const doCounter = async () => {
+  //   const counterWorker = await spawn(new Worker('../workers/counter'));
 
-await counter.finish()
+  //   setCounter(counterWorker);
 
-await Thread.terminate(counter)
+  //   // await counter.increment();
+  //   // await counter.decrement();
+  //   // await counter.increment();
+  //   // await counter.increment();
+  //   // await counter.decrement();
+  //   // await counter.decrement();
+
+  //   // await counter.finish();
+
+  //   // await Thread.terminate(counter);
+  // };
+
+  const increment = () => {
+    setTimeout(async () => {
+      await counter.increment();
+    }, 1000);
+
+    // await counter.finish();
+  };
+
+  const decrement = () => {
+    setTimeout(async () => {
+      await counter.decrement();
+    }, 1000);
+
+    // await counter.finish();
+  };
+
+  // if (!counter) {
+  //   doCounter();
+  // }
 
   return (
     <Paper className={classes.root}>
-      <Tabs />
+      <Button color="primary" onClick={increment}>
+        Increment +
+      </Button>
+      <h3>{currCount}</h3>
+      <Button color="primary" onClick={decrement}>
+        Decrement -
+      </Button>
     </Paper>
   );
-}
+};
 
 export default HomeView;

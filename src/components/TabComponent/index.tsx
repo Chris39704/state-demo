@@ -12,7 +12,12 @@ export default function SimpleTabs() {
   return (
     <div>
       <Grid container>
-      {userIDs.valueSeq().toArray().map((id: string) => <UserCard key={id} id={id} />)}
+        {userIDs
+          .valueSeq()
+          .toArray()
+          .map((id: string) => (
+            <UserCard key={id} id={id} />
+          ))}
       </Grid>
     </div>
   );

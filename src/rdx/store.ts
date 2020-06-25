@@ -27,7 +27,10 @@ middlewares.push(thunkMiddleware);
 if (process.env.NODE_ENV === 'development') {
   console.log('Running In Dev');
   composeEnhancers = composeWithDevTools({ maxAge: 20, latency: 0 });
-  store = createStore(rootReducer, composeEnhancers(applyMiddleware(...middlewares)));
+  store = createStore(
+    rootReducer,
+    composeEnhancers(applyMiddleware(...middlewares))
+  );
 } else {
   store = createStore(rootReducer, applyMiddleware(...middlewares));
 }

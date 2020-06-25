@@ -7,6 +7,9 @@ const pullUserIds = (state: any) => state.users.map((u: any) => u.id);
 // @ts-ignore
 const createDeepEqualSelector = createSelectorCreator(defaultMemoize, isEqual);
 
-export const makeUserIds = createDeepEqualSelector(pullUserIds, (userId) => userId);
+export const makeUserIds = createDeepEqualSelector(
+  pullUserIds,
+  (userId) => userId
+);
 
 export const makeUser = createDeepEqualSelector(pullUser, (user) => user);

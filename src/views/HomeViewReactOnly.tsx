@@ -16,23 +16,22 @@ export const HomeViewContextStyle = makeStyles((theme: Theme) =>
 const HomeViewContext = () => {
   console.log('Rendering HomeViewReactOnly');
   const classes = HomeViewContextStyle();
-  const [ userList, setUserList ] = useState([] as any);
+  const [userList, setUserList] = useState([] as any);
 
   useEffect(() => {
     async function Users() {
       // TODO: try this call in saga instead
-    const users = await getUsers(5);
-        setUserList(users);
+      const users = await getUsers(5);
+      setUserList(users);
     }
     Users();
-  }, [])
-
+  }, []);
 
   return (
     <Paper className={classes.root}>
       <Tabs users={userList} />
     </Paper>
   );
-}
+};
 
 export default HomeViewContext;

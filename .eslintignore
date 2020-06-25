@@ -1,0 +1,18 @@
+# **/__tests__/*
+**/spec/*
+# **/.*/
+dll
+lib
+node_modules
+**/node_modules/*
+dist
+**/dist/*
+build
+**/build/*
+coverage
+**/coverage/*
+Plop
+**/Plop/*
+src/react-app-env.d.ts
+plopfile.js
+fake

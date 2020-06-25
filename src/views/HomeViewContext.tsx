@@ -4,7 +4,6 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Tabs from 'components/TabContext';
 import UserProvider from 'hooks/UserContext';
 
-
 export const HomeViewContextStyle = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -18,14 +17,13 @@ const HomeViewContext = () => {
   console.log('Rendering HomeViewContext');
   const classes = HomeViewContextStyle();
 
-
   return (
     <UserProvider>
-    <Paper className={classes.root}>
-      <Tabs />
-    </Paper>
+      <Paper className={classes.root}>
+        <Tabs />
+      </Paper>
     </UserProvider>
   );
-}
+};
 
 export default HomeViewContext;

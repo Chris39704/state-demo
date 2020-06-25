@@ -14,16 +14,21 @@ const useStyles = makeStyles((theme: Theme) =>
     chip: {
       margin: theme.spacing(0.5),
     },
-  }),
+  })
 );
 
-export default function Skills({ skills, edit } : { skills: string[] | any; edit: (skills: any) => void }) {
+export default function Skills({
+  skills,
+  edit,
+}: {
+  skills: string[] | any;
+  edit: (skills: any) => void;
+}) {
   const classes = useStyles();
 
   console.log('Rendering Skills');
 
   const handleDelete = (skillName: String) => () => {
-
     const updatedSkills = skills.filter((skill: String) => skill !== skillName);
     edit({ skills: updatedSkills });
   };

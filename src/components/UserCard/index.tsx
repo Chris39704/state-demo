@@ -17,60 +17,67 @@ const useStyles = makeStyles({
   },
 });
 
-export default function UserCard({id} : { id: string }) {
+export default function UserCard({ id }: { id: string }) {
   const classes = useStyles();
   const user = useSelector((state: any) => makeUser(state, id));
-  const [state, setState] = React.useState({...user});
+  const [state, setState] = React.useState({ ...user });
   const dispatch = useDispatch();
 
   console.log('Rendering Card for id: ' + id);
 
-
-const editUser = () => {
-  let updatedUser = {...user, ...state };
+  const editUser = () => {
+    const updatedUser = { ...user, ...state };
     dispatch({ type: TYPES.EDIT_USER, payload: updatedUser });
-}
+  };
 
-const editUserSkill = (skills: any) => {
-  let updatedSkills = { id, ...skills };
+  const editUserSkill = (skills: any) => {
+    const updatedSkills = { id, ...skills };
     dispatch({ type: TYPES.EDIT_SKILL, payload: updatedSkills });
-}
+  };
 
-const handleChangeName = (e: any) => {
+  const handleChangeName = (e: any) => {
     setState({ ...state, name: e.target.value });
+  };
+  const handleChangeDOB = (e: any) => {
+    setState({ ...state, dob: e.target.value });
+  };
+  const handleChangeLocation = (e: any) => {
+    setState({ ...state, location: e.target.value });
+  };
 
-}
-const handleChangeDOB = (e: any) => {
-  setState({ ...state, dob: e.target.value });
-
-}
-const handleChangeLocation = (e: any) => {
-  setState({ ...state , location: e.target.value });
-
-}
-
-
-// const removeUser = () => {
-//     dispatch({ type: TYPES.REMOVE_USER, payload: id });
-// }
+  // const removeUser = () => {
+  //     dispatch({ type: TYPES.REMOVE_USER, payload: id });
+  // }
 
   return (
     <Card className={classes.root} key={id}>
       <CardActionArea>
         <CardContent>
-        <form className={classes.root} noValidate autoComplete="off">
-        <Input value={state.name} onChange={handleChangeName} inputProps={{ 'aria-label': 'name' }} />
-        <Input value={state.dob} onChange={handleChangeDOB}  inputProps={{ 'aria-label': 'date of birth' }} />
-        <Input value={state.location} onChange={handleChangeLocation}  inputProps={{ 'aria-label': 'location' }} />
-        <Skills id={id} edit={editUserSkill} />
-        </form>
+          <form className={classes.root} noValidate autoComplete="off">
+            <Input
+              value={state.name}
+              onChange={handleChangeName}
+              inputProps={{ 'aria-label': 'name' }}
+            />
+            <Input
+              value={state.dob}
+              onChange={handleChangeDOB}
+              inputProps={{ 'aria-label': 'date of birth' }}
+            />
+            <Input
+              value={state.location}
+              onChange={handleChangeLocation}
+              inputProps={{ 'aria-label': 'location' }}
+            />
+            <Skills id={id} edit={editUserSkill} />
+          </form>
         </CardContent>
       </CardActionArea>
       <CardActions>
         <Button size="small" color="primary" onClick={editUser}>
           Update User
         </Button>
-        </CardActions>
+      </CardActions>
     </Card>
   );
 }

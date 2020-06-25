@@ -9,7 +9,15 @@ export default (state = defaultState, action: AnyAction) => {
   const { type } = action;
   switch (type) {
     case Types.ADD_USERS:
-    const userSkills = action.payload.map((user: { id: number; name: String; dob: String; location: String; skills: String[]}) => [user.id, user.skills]);
+      const userSkills = action.payload.map(
+        (user: {
+          id: number;
+          name: String;
+          dob: String;
+          location: String;
+          skills: String[];
+        }) => [user.id, user.skills]
+      );
       return state.merge(userSkills);
     case Types.EDIT_SKILL:
       return state.merge({ [action.payload.id]: action.payload.skills });

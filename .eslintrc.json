@@ -1,0 +1,153 @@
+{
+    "root": true,
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+        "react-app",
+        "prettier",
+        "prettier/@typescript-eslint",
+        "prettier/react"
+    ],
+    "plugins": [
+        "@typescript-eslint",
+        "prettier"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 11,
+        "sourceType": "module",
+        "tsconfigRootDir": "./",
+        "extraFileExtensions": [
+            ".json"
+        ],
+        "project": "./tsconfig.eslint.json",
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "warnOnUnsupportedTypeScriptVersion": false
+    },
+    "rules": {
+        "prettier/prettier": "error",
+        "no-unused-vars": "off",
+        "no-unused-expressions": "off",
+        "eol-last": 0,
+        "prefer-const": "warn",
+        "import/newline-after-import": [
+            "error",
+            {
+                "count": 1
+            }
+        ],
+        "react/jsx-props-no-spreading": 1,
+        "react-hooks/rules-of-hooks": "off",
+        "react-hooks/exhaustive-deps": "off",
+        "tree-shaking/no-side-effects-in-initialization": 0
+    },
+    "settings": {
+        "react": {
+            "pragma": "React",
+            "version": "detect"
+        },
+        "import/parsers": {
+            "@typescript-eslint/parser": [
+                ".ts",
+                ".tsx"
+            ]
+        },
+        "import/resolver": {
+            "node": {
+                "moduleDirectory": "node_modules"
+            }
+        }
+    },
+    "overrides": [
+        {
+            "files": [
+                "**/*.ts?(x)"
+            ],
+            "rules": {
+                "@typescript-eslint/no-floating-promises": [
+                    "off"
+                ],
+                "@typescript-eslint/no-empty-interface": [
+                    "error",
+                    {
+                        "allowSingleExtends": true
+                    }
+                ],
+                "@typescript-eslint/unbound-method": "off",
+                "@typescript-eslint/no-unsafe-return": "off",
+                "@typescript-eslint/explicit-module-boundary-types": "off",
+                "@typescript-eslint/no-inferrable-types": "warn",
+                "@typescript-eslint/no-unsafe-member-access": "off",
+                "@typescript-eslint/no-unused-expressions": [
+                    2,
+                    {
+                        "allowShortCircuit": true,
+                        "allowTernary": true,
+                        "allowTaggedTemplates": true
+                    }
+                ],
+                "@typescript-eslint/naming-convention": [
+                    "warn",
+                    {
+                        "selector": "interface",
+                        "format": [
+                            "PascalCase"
+                        ],
+                        "prefix": [
+                            "I"
+                        ]
+                    }
+                ],
+                "@typescript-eslint/explicit-member-accessibility": 0,
+                "@typescript-eslint/no-var-requires": [
+                    "warn"
+                ],
+                "@typescript-eslint/no-non-null-assertion": 0,
+                "@typescript-eslint/no-explicit-any": 0,
+                "@typescript-eslint/no-unused-vars": [
+                    "warn"
+                ],
+                "@typescript-eslint/prefer-includes": [
+                    "warn"
+                ]
+            }
+        },
+        {
+            "extends": [
+                "plugin:jest/recommended",
+                "plugin:jest-dom/recommended",
+                "plugin:testing-library/react"
+            ],
+            "files": [
+                "**/__tests__/**/*.{test,spec}.{ts,tsx}"
+            ],
+            "rules": {
+                "jest/expect-expect": "off",
+                "jest/no-identical-title": "warn"
+            }
+        },
+        {
+            "extends": [
+                "plugin:mocha/recommended",
+                "plugin:chai-expect/recommended"
+            ],
+            "files": [
+                "**/spec/**"
+            ],
+            "rules": {
+                "mocha/no-mocha-arrows": "off"
+            }
+        }
+    ]
+}
+// {
+//   // enable the rule specifically for TypeScript files
+//   "files": ["*.ts", "*.tsx"],
+//   "rules": {
+//     "@typescript-eslint/explicit-function-return-type": ["error"]
+//   }
+// },
