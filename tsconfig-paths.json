@@ -2,14 +2,15 @@
 
 // NOTE: redux renamed to rdx in folders to avoid conflict with redux package
 {
-    "compilerOptions": {
-      "baseUrl": "./src",
-      "paths": {
-        "components/*": ["components/*"],
-        "redux/*": ["rdx/*"],
-        "hooks/*": ["hooks/*"],
-        "views/*": ["views/*"],
-        "utils/*": ["utils/*"]
-      }
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "components/*": ["components/*"],
+      "redux/*": ["rdx/*"],
+      "mobx/*": ["mobx/*"],
+      "hooks/*": ["hooks/*"],
+      "views/*": ["views/*"],
+      "utils/*": ["utils/*"]
     }
   }
+}
