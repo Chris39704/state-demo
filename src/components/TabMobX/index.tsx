@@ -1,26 +1,23 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import UserCard from 'components/UserCardMobX';
-import { observer, useObserver } from 'mobx-react-lite';
-import { useMST } from 'mobx/index';
+import { MobXUserCard } from 'components/UserCardMobX';
+import { observer } from 'mobx-react-lite';
+import { useUserStoreWithDataMap } from 'hooks/mobx/UserStore';
 
-const SimpleTabs = observer(() => {
-  const userIDs = useUsers();
+const MobXTabsTSX = () => {
+  const { userIds } = useUserStoreWithDataMap((store) => ({
+    userIds: store.userIds,
+  }));
 
   return (
     <div>
       <Grid container>
-        {userIDs.map((id: string) => (
-          <UserCard key={id} id={id} />
+        {userIds.map((id: string) => (
+          <MobXUserCard key={id} id={id} />
         ))}
       </Grid>
     </div>
   );
-});
+};
 
-function useUsers() {
-  const { USER_STORE } = useMST();
-  return useObserver(() => USER_STORE.UserIds);
-}
-
-export default SimpleTabs;
+export const MobXTabs = observer(MobXTabsTSX);

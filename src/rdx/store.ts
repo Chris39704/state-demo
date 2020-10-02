@@ -1,4 +1,4 @@
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, createStore, Middleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunkMiddleware from 'redux-thunk';
 // import { createLogger } from 'redux-logger';
@@ -17,7 +17,7 @@ let composeEnhancers;
 
 const sagaMiddleware = createSagaMiddleware();
 
-const middlewares = [];
+const middlewares = [] as Middleware[];
 middlewares.push(sagaMiddleware);
 middlewares.push(thunkMiddleware);
 

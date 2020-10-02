@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Paper from '@material-ui/core/Paper';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Tabs from 'components/TabReact';
-import { getUsers } from 'utils/api';
+import { getMockUsers } from 'utils/api';
 
-export const HomeViewContextStyle = makeStyles((theme: Theme) =>
+export const HomeViewContextStyle = makeStyles(() =>
   createStyles({
     root: {
       height: '100%',
@@ -20,8 +20,7 @@ const HomeViewContext = () => {
 
   useEffect(() => {
     async function Users() {
-      // TODO: try this call in saga instead
-      const users = await getUsers(5);
+      const users = getMockUsers(5);
       setUserList(users);
     }
     Users();

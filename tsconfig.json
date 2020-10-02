@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
+    "target": "ES2020",
+    "module": "ESNext",
     "lib": [
       "DOM",
+      "DOM.Iterable",
+      "ES2020",
       "ScriptHost",
-      "esnext"
     ],
     "baseUrl": "src",
     "allowJs": true,
@@ -13,17 +14,24 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    // "strict": true,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
     "skipDefaultLibCheck": true,
     "importHelpers": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "incremental": true,
     "experimentalDecorators": true,
+    "noImplicitReturns": true,
+    "noImplicitAny": false,
+    "noFallthroughCasesInSwitch": true,
+    "noEmit": true,
+    "inlineSourceMap": true,
+    "sourceMap": false,
     "jsx": "react",
     "typeRoots": [
+      "./src/typings",
       "./node_modules/@types"
     ]
   },
@@ -31,11 +39,10 @@
     "src"
   ],
   "exclude": [
-    "**/.*/",
-    "**/node_modules/*",
-    "**/dist/*",
-    "**/build/*",
-    "**/coverage/*",
-    "**/Plop/*",
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/coverage/**",
+    "**/Plop/**",
   ]
 }

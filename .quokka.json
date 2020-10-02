@@ -1,0 +1,14 @@
+{
+    "plugins": [
+        "jsdom-quokka-plugin",
+        "babel-alias-quokka-plugin"
+    ],
+    "babel": {
+        "ts": true,
+        "presets": [
+            "react-app"
+        ]
+    },
+    "stdEsm": false,
+    "nativeEsm": true
+}

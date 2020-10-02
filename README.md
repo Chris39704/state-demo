@@ -1,5 +1,5 @@
 <p align="center">
-State Management Demo
+State Management Examples
 </p>
 
 <br>
@@ -7,6 +7,7 @@ State Management Demo
 <br />
 
 <div align="center">
+  <a href="https://mobx-state-tree.js.org/" target="_blank"><img src="./src/mst.png" height="85px" width="80px" /></a>
   <a href="https://facebook.github.io/react/" target="_blank"><img src="./src/logo.svg" height="85px" width="175px" /></a>
   <a href="http://redux.js.org/" target="_blank"><img src="./src/redux.png" height="80px" width="85px" /></a>
 </div>
@@ -21,7 +22,7 @@ State Management Demo
 
 ## About The Project
 
-There are 3 different routes / examples in this project. `Redux/Context/State-Only`
+There are 4 different routes / examples in this project. `Redux/MobX-State-Tree/Context/State-Only`
 
 ```bash
 $ yarn install | npm i
@@ -50,20 +51,19 @@ State-Only Example Folders are named as such `SkillCardReact, TabReact, UserCard
 
 ## Misc
 
-The Application pulls sample data from my node api. (You can modify the number of items returned in each HomeView - file or for context in the Tab component file where a number value is passed for the number of items to return *Up to 1000*)
+The Application now creates mock faker data. (You can modify the number of items returned in each HomeView file or for context in the Tab component file where a number value is passed for the number of items to return)
 
-Console logs print out when a component re-renders so that you can see when a component is re-rendering. (optimal rendering would be just rendering the component you are modifying and it's children)
+You can click the React, Redux, or MST logos at the top of the README to get more indepth information on Hooks / Context / Redux / MST.
 
-It's written in TypeScript but was put together rather quickly so don't be suprised if you run into typing errors when modifying code. Alot of it was thrown together with Any's to substitute for time in putting this together rather quickly.
-
-
-You can click the React or Redux logos at the top of the README to get more indepth information on Hooks / Context / Redux.
-
+<br />
 
 ## Maintainers
 
-- [Chris](https://github.com/Chris3970439704)
+- [Chris](https://github.com/Chris39704)
 
+## Contributors / Credit
+
+- [Mike](https://github.com/CmplxStack) <br/><sub><i>Big thanks to Mike. Mike configured most of the environment config and created the MST architecture design in use.</i></sub>
 
 [github-tag-url]: https://github.com/Chris39704/state-demo
-[github-version]: https://img.shields.io/badge/Version-0.0.1-lightgrey.svg
+[github-version]: https://img.shields.io/badge/Version-0.1.0-lightgrey.svg

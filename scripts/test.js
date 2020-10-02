@@ -13,20 +13,14 @@ process.on('unhandledRejection', (err) => {
 // Ensure environment variables are read.
 require('../config/env');
 
-// eslint-disable-next-line jest/no-jest-import
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const jest = require('jest');
-
-// eslint-disable-next-line import/order
 const execSync = require('child_process').execSync;
 
 const argv = process.argv.slice(2);
 
 function isInGitRepository() {
   try {
-    execSync('git rev-parse --is-inside-work-tree', {
-      stdio: 'ignore',
-    });
+    execSync('git rev-parse --is-inside-work-tree', { stdio: 'ignore' });
     return true;
   } catch (e) {
     return false;

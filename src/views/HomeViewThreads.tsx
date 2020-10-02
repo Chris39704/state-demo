@@ -1,27 +1,26 @@
 import React, { useState } from 'react';
 import Paper from '@material-ui/core/Paper';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import { spawn, Worker } from 'threads';
 import { ObservablePromise } from 'threads/dist/observable-promise';
-import { PrivateThreadProps, ModuleProxy } from 'threads/dist/types/master';
+import { ModuleProxy } from 'threads/dist/types/master';
 
 // import { getUsers } from 'utils/api';
 
-export const HomeViewStyle = makeStyles((theme: Theme) =>
+export const HomeViewStyle = makeStyles(() =>
   createStyles({
     root: {
       height: '100%',
       width: '100%',
     },
-  })
+  }),
 );
 
 const HomeView = () => {
   console.log('Rendering HomeViewThreads');
   const [counter, setCounter] = useState<
-    | undefined
-    | ((() => ObservablePromise<any>) & PrivateThreadProps & ModuleProxy<any>)
+    undefined | ((() => ObservablePromise<any>) & ModuleProxy<any>)
   >();
   const [currCount, setCurr] = useState(0);
   const classes = HomeViewStyle();
@@ -64,7 +63,7 @@ const HomeView = () => {
 
   const increment = () => {
     setTimeout(async () => {
-      await counter.increment();
+      await counter?.increment();
     }, 1000);
 
     // await counter.finish();
@@ -72,7 +71,7 @@ const HomeView = () => {
 
   const decrement = () => {
     setTimeout(async () => {
-      await counter.decrement();
+      await counter?.decrement();
     }, 1000);
 
     // await counter.finish();

@@ -10,11 +10,10 @@
         "scripts"
     ],
     "exclude": [
-        "**/.*/",
-        "**/node_modules/*",
-        "**/dist/*",
-        "**/build/*",
-        "**/coverage/*",
-        "**/Plop/*"
+        "**/node_modules",
+        "**/dist/**",
+        "**/build/**",
+        "**/coverage/**",
+        "**/Plop/**"
     ]
 }

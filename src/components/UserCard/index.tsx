@@ -26,8 +26,8 @@ export default function UserCard({ id }: { id: string }) {
   console.log('Rendering Card for id: ' + id);
 
   const editUser = () => {
-    const updatedUser = { ...user, ...state };
-    dispatch({ type: TYPES.EDIT_USER, payload: updatedUser });
+    // const updatedUser = { ...user, ...state };
+    dispatch({ type: TYPES.EDIT_USER, payload: state });
   };
 
   const editUserSkill = (skills: any) => {
@@ -44,10 +44,6 @@ export default function UserCard({ id }: { id: string }) {
   const handleChangeLocation = (e: any) => {
     setState({ ...state, location: e.target.value });
   };
-
-  // const removeUser = () => {
-  //     dispatch({ type: TYPES.REMOVE_USER, payload: id });
-  // }
 
   return (
     <Card className={classes.root} key={id}>

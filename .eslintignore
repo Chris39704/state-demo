@@ -1,18 +1,13 @@
-# **/__tests__/*
-**/spec/*
+**/__tests__/**
+**/spec/**
 # **/.*/
-dll
-lib
-node_modules
-**/node_modules/*
-dist
-**/dist/*
-build
-**/build/*
-coverage
-**/coverage/*
-Plop
-**/Plop/*
+**/dll/**
+**/lib/**
+**/node_modules/**
+**/dist/**
+**/build/**
+**/coverage/**
+**/Plop/**
 src/react-app-env.d.ts
 plopfile.js
 fake

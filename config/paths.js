@@ -44,14 +44,9 @@ const resolveModule = (resolveFn, filePath) => {
 
 module.exports = {
   dotenv: resolveApp('.env'),
-  appEslintConfig: resolveApp('.eslintrc.json'),
   appPath: resolveApp('.'),
-  appBuild: resolveApp('../src/main/resources/static'),
-  appConfig: resolveApp('config'),
-  appDLLConfig: resolveApp('config/library.webpack.config.js'),
-  appDLLFolder: resolveApp('dll'),
+  appBuild: resolveApp('build'),
   appPublic: resolveApp('public'),
-  appFavicon: resolveApp('public/favicon.ico'),
   appHtml: resolveApp('public/index.html'),
   appIndexJs: resolveModule(resolveApp, 'src/index'),
   appPackageJson: resolveApp('package.json'),
@@ -64,6 +59,7 @@ module.exports = {
   // testsSetup: resolveModule(resolveApp, 'src/setupTests'),
   proxySetup: resolveApp('src/setupProxy.js'),
   appNodeModules: resolveApp('node_modules'),
+  swSrc: resolveModule(resolveApp, 'src/service-worker'),
   publicUrlOrPath,
 };
 

@@ -1,24 +1,19 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const fs = require('fs');
 const path = require('path');
-
+const paths = require('./paths');
 const chalk = require('react-dev-utils/chalk');
 const resolve = require('resolve');
 
-const paths = require('./paths');
-
 /**
- * Get the baseUrl of a compilerOptions object.
+ * Get additional module paths based on the baseUrl of a compilerOptions object.
  *
  * @param {Object} options
  */
 function getAdditionalModulePaths(options = {}) {
   const baseUrl = options.baseUrl;
-  // We need to explicitly check for null and undefined (and not a falsy value) because
-  // TypeScript treats an empty string as `.`.
-  if (baseUrl == null) {
-    const nodePath = process.env.NODE_PATH || '';
-    return nodePath.split(path.delimiter).filter(Boolean);
+
+  if (!baseUrl) {
+    return '';
   }
 
   const baseUrlResolved = path.resolve(paths.appPath, baseUrl);
@@ -37,7 +32,7 @@ function getAdditionalModulePaths(options = {}) {
   // If the path is equal to the root directory we ignore it here.
   // We don't want to allow importing from the root directly as source files are
   // not transpiled outside of `src`. We do allow importing them with the
-  // absolute path (e.g. `src/Components/`Bu`tton.js`) but we set that up with
+  // absolute path (e.g. `src/Components/Button.js`) but we set that up with
   // an alias.
   if (path.relative(paths.appPath, baseUrlResolved) === '') {
     return null;
@@ -46,9 +41,9 @@ function getAdditionalModulePaths(options = {}) {
   // Otherwise, throw an error.
   throw new Error(
     chalk.red.bold(
-      "`baseUrl can only be set to `src` Your project's `baseUrl` can only be set to `src` or `node_modules`." +
-        ' Create React App does not support other values at this time.'
-    )
+      "Your project's `baseUrl` can only be set to `src` or `node_modules`." +
+        ' Create React App does not support other values at this time.',
+    ),
   );
 }
 
@@ -101,7 +96,7 @@ function getModules() {
 
   if (hasTsConfig && hasJsConfig) {
     throw new Error(
-      'You have both a tsconfig.json and a jsconfig.json. If you are using TypeScript please remove your jsconfig.json file.'
+      'You have both a tsconfig.json and a jsconfig.json. If you are using TypeScript please remove your jsconfig.json file.',
     );
   }
 
@@ -111,9 +106,6 @@ function getModules() {
   // TypeScript project and set up the config
   // based on tsconfig.json
   if (hasTsConfig) {
-    // const ts = require(resolve.sync("ttypescript", {
-    //   basedir: paths.appNodeModules,
-    // }));
     const ts = require(resolve.sync('typescript', {
       basedir: paths.appNodeModules,
     }));

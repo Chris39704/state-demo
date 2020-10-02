@@ -16,7 +16,7 @@ export default (state = defaultState, action: AnyAction) => {
       return state.merge(newUsers);
     case Types.EDIT_USER:
       const { skills, ...rest } = action.payload;
-      return state.merge({ [action.payload.id]: { ...rest } });
+      return state.mergeDeep({ [action.payload.id]: { ...rest } });
     case Types.REMOVE_USER:
       return state.delete(action.id);
     default:

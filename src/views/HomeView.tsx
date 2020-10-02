@@ -3,7 +3,7 @@ import Paper from '@material-ui/core/Paper';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Tabs from 'components/TabComponent';
 import { useDispatch } from 'react-redux';
-import { getUsers } from 'utils/api';
+import { getMockUsers } from 'utils/api';
 import TYPES from 'utils/constants';
 
 export const HomeViewStyle = makeStyles((theme: Theme) =>
@@ -22,12 +22,11 @@ const HomeView = () => {
 
   useEffect(() => {
     async function Users() {
-      // TODO: try this call in saga instead
-      const users = await getUsers(1000);
+      const users = getMockUsers(200);
       dispatch({ type: TYPES.ADD_USERS_SAGA, payload: users });
     }
     Users();
-  }, [dispatch]);
+  }, []);
 
   return (
     <Paper className={classes.root}>

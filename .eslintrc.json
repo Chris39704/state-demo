@@ -1,22 +1,16 @@
 {
     "root": true,
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
-    },
     "parser": "@typescript-eslint/parser",
     "extends": [
         "react-app",
-        "prettier",
-        "prettier/@typescript-eslint",
-        "prettier/react"
+        "prettier"
     ],
     "plugins": [
         "@typescript-eslint",
         "prettier"
     ],
     "parserOptions": {
-        "ecmaVersion": 11,
+        "ecmaVersion": 2020,
         "sourceType": "module",
         "tsconfigRootDir": "./",
         "extraFileExtensions": [
@@ -32,14 +26,12 @@
         "prettier/prettier": "error",
         "no-unused-vars": "off",
         "no-unused-expressions": "off",
-        "eol-last": 0,
+        "eol-last": "off",
         "prefer-const": "warn",
-        "import/newline-after-import": [
-            "error",
-            {
-                "count": 1
-            }
-        ],
+        "import/order": "off",
+        "import/no-unresolved": "error",
+        "import/no-duplicates": "error",
+        "import/newline-after-import": "error",
         "react/jsx-props-no-spreading": 1,
         "react-hooks/rules-of-hooks": "off",
         "react-hooks/exhaustive-deps": "off",
@@ -47,23 +39,26 @@
     },
     "settings": {
         "react": {
-            "pragma": "React",
             "version": "detect"
         },
-        "import/parsers": {
-            "@typescript-eslint/parser": [
-                ".ts",
-                ".tsx"
-            ]
+        "import/cache": {
+            "lifetime": 15
         },
         "import/resolver": {
-            "node": {
-                "moduleDirectory": "node_modules"
+            "typescript": {
+                "alwaysTryTypes": true // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
             }
         }
     },
     "overrides": [
         {
+            "plugins": [
+                "@typescript-eslint"
+            ],
+            "extends": [
+                "plugin:import/typescript",
+                "prettier/@typescript-eslint"
+            ],
             "files": [
                 "**/*.ts?(x)"
             ],
@@ -117,37 +112,37 @@
             }
         },
         {
+            "files": [
+                "*.{j,t}sx"
+            ],
+            "plugins": [
+                "react-perf"
+            ],
+            "rules": {
+                "react-perf/jsx-no-new-object-as-prop": "warn",
+                "react-perf/jsx-no-new-array-as-prop": "off",
+                "react-perf/jsx-no-new-function-as-prop": "off",
+                "react-perf/jsx-no-jsx-as-prop": "off",
+                "react-hooks/rules-of-hooks": "off",
+                "react-hooks/exhaustive-deps": "off",
+                "react/prop-types": "off",
+                "react/jsx-props-no-spreading": "off"
+            }
+        },
+        {
             "extends": [
                 "plugin:jest/recommended",
+                "plugin:jest-formatting/recommended",
                 "plugin:jest-dom/recommended",
                 "plugin:testing-library/react"
             ],
             "files": [
-                "**/__tests__/**/*.{test,spec}.{ts,tsx}"
+                "./src/**/__tests__/**/*.test.{ts,tsx}"
             ],
             "rules": {
                 "jest/expect-expect": "off",
                 "jest/no-identical-title": "warn"
             }
-        },
-        {
-            "extends": [
-                "plugin:mocha/recommended",
-                "plugin:chai-expect/recommended"
-            ],
-            "files": [
-                "**/spec/**"
-            ],
-            "rules": {
-                "mocha/no-mocha-arrows": "off"
-            }
         }
     ]
 }
-// {
-//   // enable the rule specifically for TypeScript files
-//   "files": ["*.ts", "*.tsx"],
-//   "rules": {
-//     "@typescript-eslint/explicit-function-return-type": ["error"]
-//   }
-// },
